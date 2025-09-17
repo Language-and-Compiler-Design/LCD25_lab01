@@ -45,9 +45,7 @@ This will start the program that evaluates expressions written in the defined ex
 
 ### Structure
 
-bin/ – main executable entry point (calc.exe).
-
-lib/ – core modules for the expression language.
+src/ – main executable and core modules 
 
 ### Next Steps
 
