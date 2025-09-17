@@ -1,0 +1,17 @@
+
+(library
+ (name calc_lib)
+ (modules eval ast lexer parser))
+
+(ocamllex
+ (modules lexer))
+
+(ocamlyacc
+ (modules parser))
+
+(executable
+ (public_name calc )
+ (name calc)
+ (modules calc)
+ (flags (:standard -w -32 -w -33))
+ (libraries calc_lib))
