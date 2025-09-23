@@ -5,10 +5,6 @@ open Ast
 %token <int> INT
 %token PLUS MINUS TIMES DIV LPAREN RPAREN EOF
 
-%left PLUS MINUS
-%left TIMES DIV
-%nonassoc UMINUS
-
 %start main
 %type <Ast.ast> main
 
@@ -17,20 +13,17 @@ main:
   expr EOF                { $1 }
 
 expr:
-  | expr PLUS  term       { Add ($1, $3) }
-  | expr MINUS term       { Sub ($1, $3) }
-  | term                  { $1 }
+  | expr PLUS  term      { Add ($1, $3) }
+  | expr MINUS term      { Sub ($1, $3) }
+  | term                  {$1}
 
 term:
-  | term TIMES factor     { Mul ($1, $3) }
-  | term DIV   factor     { Div ($1, $3) }
-  | factor                { $1 }
+  | term TIMES  factor      { Mul ($1, $3) }
+  | term DIV    factor      { Div ($1, $3) }
+  | factor                 {$1}
 
-factor:
-  | MINUS factor          { Neg $2 }
-  | atom                  { $1 }
-
-atom:
+factor: 
   | INT                   { Num $1 }
   | LPAREN expr RPAREN    { $2 }
+  | MINUS factor          { Neg $2 }
 ;

@@ -2,9 +2,13 @@
 
 open Ast
 
-let rec eval = function
+let rec eval e =
+  match e with  
   | Num n -> n
   | Add (e1,e2) -> eval e1 + eval e2
-  | _ -> assert false
+  | Sub (e1,e2) -> eval e1 - eval e2
+  | Mul (e1,e2) -> eval e1 * eval e2
+  | Div (e1,e2) -> eval e1 / eval e2
+  | Neg e1 -> - eval e1 
 
 (* Extension point: This function needs to be extended to cover all the cases of the AST *)

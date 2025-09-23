@@ -19,7 +19,9 @@ let () =
     match read_line () with
     | s ->
         (try
-           let v = parse_string s |> Eval.eval in
+           let e = parse_string s in 
+           print_endline (Ast.unparse_ast 0 e);
+           let v = Eval.eval e in
            Printf.printf "= %d\n%!" v
          with Failure msg ->
            Printf.eprintf "Error: %s\n%!" msg);
@@ -27,3 +29,4 @@ let () =
     | exception End_of_file -> print_endline "\nGoodbye!"
   in
   loop ()
+ 
